@@ -22,10 +22,13 @@ func (pool *Pool) Start() {
 	for {
 		select {
 		case client := <-pool.Register:
+			// add client to pool
 			pool.Clients[client] = true
+			fmt.Println(pool.Clients)
 			fmt.Println("Size of Connection Pool: ", len(pool.Clients))
 			for client, _ := range pool.Clients {
-				fmt.Println(client)
+				fmt.Println(*client)
+				//send message to all clients that a new user has joined
 				client.Conn.WriteJSON(Message{Type: 1, Body: "New User Joined..."})
 			}
 			break

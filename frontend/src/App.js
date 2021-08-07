@@ -7,9 +7,10 @@ function App() {
   const [chatState, setChatState] = useState([]);
 
   useEffect(() => {
-    connect((msg) => {
-      setChatState((prevState) => [...prevState, msg]);
-    });
+    connect();
+    // connect((msg) => {
+    //   setChatState((prevState) => [...prevState, msg]);
+    // });
   }, [setChatState]);
 
   const send = (event) => {
@@ -18,13 +19,15 @@ function App() {
       event.target.value = "";
     }
   };
+
   return (
     <div className="App">
-      <Header />
-      <ChatHistory chatHistory={chatState} />
-      <ChatInput send={send} />
+      <button onClick={() => sendMsg("hello")}>ads</button>
+      {/* <Header /> */}
+      {/* <ChatHistory chatHistory={chatState} /> */}
+      {/* <ChatInput send={send} /> */}
 
-      <button onClick={() => sendMsg("ello")}>Send Message</button>
+      {/* <button onClick={() => sendMsg("ello")}>Send Message</button> */}
     </div>
   );
 }

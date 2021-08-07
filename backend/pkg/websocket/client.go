@@ -19,12 +19,14 @@ type Message struct {
 }
 
 func (c *Client) Read() {
+	// add client to unregister channel when client closes
 	defer func() {
 		c.Pool.Unregister <- c
 		c.Conn.Close()
 	}()
 
 	for {
+		// read the incoming message
 		messageType, p, err := c.Conn.ReadMessage()
 		if err != nil {
 			log.Println(err)
